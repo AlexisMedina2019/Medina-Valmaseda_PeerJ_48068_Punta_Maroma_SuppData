@@ -82,7 +82,7 @@ plot_grid( graA11, graA12, labels = "AUTO",align = "v",label_size = 12, rel_heig
 # for each species by periods,
 # before the 1990s(represented by 1985 year) and 2019 
 library("readxl")
-ivi= read.csv("Data S3 IVI.csv")
+ivi<- read_xlsx("Data S3 IVI.xlsx")
 # trasformations
 ivi$Year = as.factor(ivi$Year)
 ivi$Year=factor(ivi$Year, levels = c("1985", "2019"))
