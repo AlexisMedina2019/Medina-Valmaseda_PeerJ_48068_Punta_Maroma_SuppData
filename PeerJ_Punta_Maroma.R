@@ -1,6 +1,5 @@
 rm(list=ls(all=TRUE))
 getwd()
-setwd("C:/Users/HP/Documents/R")
 #Load libraries
 library(dplyr)
 library(ggplot2)
