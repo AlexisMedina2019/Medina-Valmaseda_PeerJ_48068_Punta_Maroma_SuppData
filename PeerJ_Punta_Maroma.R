@@ -91,22 +91,32 @@ RIIRF<- ivi[ivi$Zone=="RF",]
 RIIHG<- ivi[ivi$Zone=="HG",]
 # Source for Figure 3 of manuscript
 # plot of IVI of each species by geomorphic zone and period of time
+require("gridExtra")
+library(grid)
+library(likert)
+my_text1 <- "RF"
+my_text2 <- "HG"
+my_grob1 = grid.text(my_text1, x=0.1,  y=0.95, gp=gpar(col="black", fontsize=14, fontface="bold"))
+my_grob2 = grid.text(my_text2, x=0.90,  y=0.95, gp=gpar(col="black", fontsize=14, fontface="bold"))
 ggplot() + 
-  geom_bar(data=RIIRF, aes(x = Spp., y=-IVI, fill=Year), position = position_stack(reverse = TRUE), stat="identity") +
-  geom_bar(data=RIIHG, aes(x = Spp., y=IVI, fill=Year), position = position_stack(reverse = TRUE), stat="identity") +
-  geom_hline(yintercept = 0, color =c("black"))+
-  scale_y_continuous(breaks=c(-40,-20,0,20,40), labels = abs(c(-40,-20,0,20,40)))+
-  coord_flip()+
-  theme_bw()+
-  labs(y="Importance Value Index (%)", x = "Species")+
-  theme(axis.text.y = element_text(hjust=0)) +
-  theme(plot.title = element_text(hjust = 0.5))+
-  theme(legend.position = "bottom")+
-  scale_fill_manual(values=c("#E69F00", "#D55E00"), 
-                    name="Year",
-                    breaks=c("1985", "2019"),
-                    labels=c("Before 1990s", "2019"))+
-  theme (axis.text.x = element_text(face="bold", colour="black", size=rel(1)),axis.text.y = element_text(face ="bold", colour="black", size=rel(1.2), hjust=0.5))+
-  theme (axis.text.y = element_text(face="bold", colour="black", size=rel(0.8), hjust=0.5))+
-  theme (axis.title = element_text(face="bold", colour="black", size=rel(1)))
-
+    geom_bar(data=RIIRF, aes(x = Spp., y=-IVI, fill=Year), position = position_stack(reverse = TRUE), stat="identity") +
+    geom_bar(data=RIIHG, aes(x = Spp., y=IVI, fill=Year), position = position_stack(reverse = TRUE), stat="identity") +
+    geom_hline(yintercept = 0, color =c("black"))+
+    scale_y_continuous(breaks=c(-40,-20,0,20,40), labels = abs(c(-40,-20,0,20,40)))+
+    coord_flip()+
+    theme_bw()+
+    ggtitle("") +  
+    theme(plot.title = element_text(size = 12, face = "bold", margin=margin(10,10,0,0)))+
+    labs(y="Importance Value Index (%)", x = "Species")+
+    theme(axis.text.y = element_text(hjust=0)) +
+    theme(plot.title = element_text(hjust = 0.5))+
+    theme(legend.position = "bottom")+
+    scale_fill_manual(values=c("#E69F00", "#D55E00"), 
+                      name="Year",
+                      breaks=c("1985", "2019"),
+                      labels=c("Before 1990s", "2019"))+
+    theme (axis.text.x = element_text(face="bold", colour="black", size=rel(1)),axis.text.y = element_text(face ="bold", colour="black", size=rel(1.2), hjust=0.5))+
+    theme (axis.text.y = element_text(face="bold", colour="black", size=rel(0.8), hjust=0.5))+
+    theme (axis.title = element_text(face="bold", colour="black", size=rel(1)))+
+    annotation_custom(my_grob1)+
+    annotation_custom(my_grob2)
